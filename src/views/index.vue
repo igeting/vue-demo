@@ -9,7 +9,7 @@
                     <menus></menus>
                 </el-aside>
                 <el-main>
-
+                    <router-view/>
                 </el-main>
             </el-container>
             <el-footer>
@@ -24,13 +24,15 @@
     import menus from '../components/menus'
 
     export default {
-        name: 'home',
+        name: 'index',
         components: {
             menus,
         }
     }
 </script>
 
-<style>
-
+<style scoped>
+    .el-aside {
+        width: 200px !important;
+    }
 </style>

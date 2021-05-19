@@ -3,8 +3,8 @@
         <template v-for="(item,index) in list">
             <!-- 标题 -->
             <template v-if="item.children.length">
-                <el-submenu :key="index" :index="item.index">
-                    <template :index="item.index" slot="title">
+                <el-submenu :key="index" :index="item.path">
+                    <template :index="item.path" slot="title">
                         <i :class="item.icon"></i>
                         <span>{{item.name}}</span>
                     </template>
@@ -15,7 +15,7 @@
             </template>
             <!-- 选项 -->
             <template v-else>
-                <el-menu-item :key="index" :index="item.index">
+                <el-menu-item :key="index" :index="item.path">
                     <i :class="item.icon"></i>
                     <span>{{item.name}}</span>
                 </el-menu-item>
