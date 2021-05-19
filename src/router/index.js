@@ -1,7 +1,13 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 
-Vue.use(VueRouter)
+Vue.use(Router)
+
+//can browse repeat path
+const RouterPush = Router.prototype.push
+Router.prototype.push = function push(to) {
+    return RouterPush.call(this, to).catch(err => err)
+}
 
 const routes = [
     {
@@ -11,7 +17,7 @@ const routes = [
     }
 ]
 
-const router = new VueRouter({
+const router = new Router({
     mode: 'history', //hash, history
     base: process.env.BASE_URL,
     routes

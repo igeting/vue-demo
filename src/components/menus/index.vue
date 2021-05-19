@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-menu :default-active="activeIndex" :collapse="false" @select="menuSelect">
-            <side-bar :list="menuList"></side-bar>
+            <side-bar :list="menuList"/>
         </el-menu>
     </div>
 </template>
@@ -19,33 +19,32 @@
                 activeIndex: '1',
                 menuList: [
                     {
-                        name: "菜单1",
-                        index: "menu1",
-                        path: "/home",
+                        name: "首页",
+                        index: "home",
+                        path: "/",
+                        icon: "el-icon-menus",
+                        children: []
+                    },
+                    {
+                        name: "系统",
+                        index: "system",
+                        path: "/",
                         icon: "el-icon-menus",
                         children: [
                             {
-                                name: "菜单1-1",
-                                index: "menu1-1",
+                                name: "关于",
+                                index: "about",
                                 path: "/about",
                                 icon: "el-icon-menus",
                                 children: []
                             }
                         ]
-                    },
-                    {
-                        name: "菜单2",
-                        index: "menu2",
-                        path: "/about",
-                        icon: "el-icon-menus",
-                        children: []
                     }
                 ],
             }
         },
         methods: {
             menuSelect(path) {
-                console.log(path)
                 this.$router.push(path)
             },
         }
