@@ -1,26 +1,20 @@
 <template>
-    <div>
+    <el-container>
+        <el-header>
+            header
+        </el-header>
         <el-container>
-            <el-header>
-                header
-            </el-header>
-            <el-container>
-                <el-aside>
-                    <div class="menu-fold" @click="menuCollapse">
-                        <i class="el-icon-s-fold" v-if="!isCollapse"></i>
-                        <i class="el-icon-s-unfold" v-if="isCollapse"></i>
-                    </div>
-                    <menus :collapse="isCollapse"></menus>
-                </el-aside>
-                <el-main>
-                    <router-view/>
-                </el-main>
-            </el-container>
-            <el-footer>
-                footer
-            </el-footer>
+            <el-aside :class="{'el-aside-fix':isCollapse}" width="200px">
+                <menus :collapse="isCollapse" @collapsed="menuCollapse"></menus>
+            </el-aside>
+            <el-main>
+                <router-view/>
+            </el-main>
         </el-container>
-    </div>
+        <el-footer>
+            footer
+        </el-footer>
+    </el-container>
 </template>
 
 <script>
@@ -34,7 +28,7 @@
         },
         data() {
             return {
-                isCollapse: true,
+                isCollapse: false,
             }
         },
         methods: {
@@ -46,44 +40,33 @@
 </script>
 
 <style scoped>
-    .menu-fold {
-        text-align: left;
-    }
-
-    .el-header {
-        background-color: darkseagreen;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 60px;
+    .el-header, .el-footer {
+        background-color: #B3C0D1;
+        color: #333;
+        text-align: center;
+        line-height: 60px;
     }
 
     .el-aside {
-        width: 200px !important;
-        display: block;
-        position: relative;
-        left: 0;
-        top: 60px;
-        bottom: 0;
+        background-color: #D3DCE6;
+        color: #333;
+        text-align: center;
+        overflow: unset;
+    }
+
+    .el-container {
+        height: 100%;
+    }
+
+    .el-aside-fix {
+        width: 64px !important;
     }
 
     .el-main {
-        position: relative;
-        top: 60px;
+        background-color: #E9EEF3;
+        color: #333;
+        text-align: center;
+        line-height: 160px;
     }
 
-    .el-footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        height: 66px;
-    }
-
-
-</style>
-
-<style>
-    ul.el-menu--collapse.el-menu span {
-        display: none;
-    }
 </style>
