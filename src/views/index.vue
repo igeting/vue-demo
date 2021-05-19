@@ -34,6 +34,12 @@
         methods: {
             menuCollapse() {
                 this.isCollapse = !this.isCollapse
+                if (this.isCollapse) {
+                    document.querySelectorAll('.el-aside span').forEach(x => {
+                        x.style.display = 'none'
+                    })
+                }
+
             },
         }
     }
