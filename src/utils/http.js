@@ -87,7 +87,7 @@ export const get = (url, params = {}, config = {}) => {
     })
 }
 
-export const post = (url, data = {}, config = {}) => {
+export const form = (url, data = {}, config = {}) => {
     return new Promise((resolve, reject) => {
         instance.post(url, qs.stringify(data), {
             headers: {
@@ -102,7 +102,7 @@ export const post = (url, data = {}, config = {}) => {
     })
 }
 
-export const json = (url, data = {}, config = {}) => {
+export const post = (url, data = {}, config = {}) => {
     return new Promise((resolve, reject) => {
         instance.post(url, data, {
             headers: {
@@ -117,9 +117,9 @@ export const json = (url, data = {}, config = {}) => {
     })
 }
 
-export const request = option => {
+export const request = options => {
     return new Promise((resolve, reject) => {
-        instance.request(option).then(res => {
+        instance.request(options).then(res => {
             resolve(res)
         }).catch(err => {
             reject(err)

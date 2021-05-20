@@ -1,4 +1,4 @@
-import {get, post, json} from '@/utils/http'
+import {get, post} from '@/utils/http'
 
-export const getUser = params => get('/getUser', params)
-export const setUser = data => json('/setUser', data)
+export const getUser = data => get('/getUser', data)
+export const setUser = data => post('/setUser', data)
