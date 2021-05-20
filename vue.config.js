@@ -28,10 +28,10 @@ module.exports = {
                 secure: false,
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api': ''
+                    '^/api': '',
                 }
             }
-        }
+        },
     },
     parallel: require('os').cpus().length > 1,
     pwa: {},
