@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-    import index from "./views/index";
+    import index from "@/views/index";
 
     export default {
         name: 'App',

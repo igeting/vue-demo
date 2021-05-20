@@ -19,7 +19,7 @@
 
 <script>
     // @ is an alias to /src
-    import menus from '../components/menus'
+    import menus from '@/components/menus'
 
     export default {
         name: 'index',

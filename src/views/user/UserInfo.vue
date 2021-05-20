@@ -6,10 +6,10 @@
 </template>
 
 <script>
-    import {getUser, setUser} from "../../api/user/user";
+    import {getUser, setUser} from "@/api/user/user";
 
     export default {
-        name: "userinfo",
+        name: "UserInfo",
         data() {
             return {
                 userList: []
@@ -28,7 +28,7 @@
             }
         },
         mounted() {
-            // this.addUser()
+            // this.getUser()
         }
     }
 </script>

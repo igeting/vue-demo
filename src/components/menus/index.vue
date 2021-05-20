@@ -5,7 +5,7 @@
             <i class="el-icon-s-unfold" v-if="collapse"></i>
         </div>
         <el-menu :default-active="activeIndex" :collapse="collapse" @select="menuSelect">
-            <side-bar :list="menuList"/>
+            <side-bar :list="menuList"></side-bar>
         </el-menu>
     </div>
 </template>
