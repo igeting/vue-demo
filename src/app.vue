@@ -7,7 +7,7 @@
     import index from "@/views/index";
 
     export default {
-        name: 'App',
+        name: 'app',
         components: {
             index,
         }
