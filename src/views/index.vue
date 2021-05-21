@@ -2,11 +2,11 @@
     <el-container>
         <el-header>
             <el-avatar class="logo" :size="'small'" :src="require('@/assets/logo.jpg')"></el-avatar>
-            <el-span>vue</el-span>
+            <el-span @click="$router.push('/')" class="title">{{title}}</el-span>
         </el-header>
         <el-container>
-            <el-aside :class="{'el-aside-fix':isCollapse}" width="200px">
-                <menus :collapse="isCollapse" @collapsed="menuCollapse"></menus>
+            <el-aside :class="{'el-aside-fix':collapse}" width="200px">
+                <menus :collapse="collapse" @collapsed="menuCollapse"></menus>
             </el-aside>
             <el-main>
                 <router-view/>
@@ -28,13 +28,14 @@
         },
         data() {
             return {
-                isCollapse: false,
+                title: 'vue',
+                collapse: false,
             }
         },
         methods: {
             menuCollapse() {
-                this.isCollapse = !this.isCollapse
-                if (this.isCollapse) {
+                this.collapse = !this.collapse
+                if (this.collapse) {
                     document.querySelectorAll('.el-aside span').forEach(x => {
                         x.style.display = 'none'
                     })
@@ -96,5 +97,10 @@
         margin-right: 10px !important;
         width: 26px;
         height: 26px;
+    }
+
+    .title {
+        font-size: 26px;
+        font-weight: bolder;
     }
 </style>
