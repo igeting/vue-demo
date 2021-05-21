@@ -1,20 +1,6 @@
 import qs from 'qs'
 import axios from 'axios'
 
-/*if (process.env.NODE_ENV == 'development') {
-    axios.defaults.baseURL = 'http://localhost:9090'
-} else if (process.env.NODE_ENV == 'debug') {
-    axios.defaults.baseURL = 'http://localhost:9090'
-} else if (process.env.NODE_ENV == 'production') {
-    axios.defaults.baseURL = 'http://localhost:9090'
-} else {
-    axios.defaults.baseURL = 'http://localhost:9090'
-}*/
-
-/*axios.defaults.retry = 4;
-axios.defaults.retryDelay = 1000;
-axios.defaults.baseURL = process.env.VUE_APP_BASEURL*/
-
 const contentTypes = {
     xml: 'text/xml;charset=utf-8',
     json: 'application/json;charset=utf-8',
@@ -23,10 +9,20 @@ const contentTypes = {
     urlencoded: 'application/x-www-form-urlencoded;charset=utf-8',
 }
 
-const instance = axios.create({
-    baseURL: '/api',
-    timeout: 10 * 1000,
-})
+let instance = null
+const Axios = () => {
+    let baseURL = process.env.base_url || '/api'
+    let token = sessionStorage.getItem("token")
+    instance = axios.create({
+        baseURL,
+        timeout: 10 * 1000,
+        headers: {
+            'Content-Type': contentTypes.json,
+            'X-Authorization': token ? token : '',
+        },
+    })
+}
+Axios()
 
 //request interceptors
 instance.interceptors.request.use(
@@ -71,60 +67,81 @@ instance.interceptors.response.use(
     }
 )
 
-export const get = (url, params = {}, config = {}) => {
-    return new Promise((resolve, reject) => {
-        instance.get(url, {
-            params: params,
-            headers: {
-                ...config,
-                'Content-Type': contentTypes.urlencoded,
-            }
-        }).then(res => {
-            resolve(res)
-        }).catch(err => {
-            reject(err)
-        })
-    })
-}
-
-export const form = (url, data = {}, config = {}) => {
-    return new Promise((resolve, reject) => {
-        instance.post(url, qs.stringify(data), {
-            headers: {
-                ...config,
-                'Content-Type': contentTypes.formdata,
-            }
-        }).then(res => {
-            resolve(res)
-        }).catch(err => {
-            reject(err)
-        })
-    })
-}
-
-export const post = (url, data = {}, config = {}) => {
-    return new Promise((resolve, reject) => {
-        instance.post(url, data, {
-            headers: {
-                ...config,
-                'Content-Type': contentTypes.json,
-            }
-        }).then(res => {
-            resolve(res)
-        }).catch(err => {
-            reject(err)
-        })
-    })
-}
-
-export const request = options => {
+const request = (options = {}) => {
     return new Promise((resolve, reject) => {
         instance.request(options).then(res => {
-            resolve(res)
+            if (res.status === 200) {
+                resolve(res)
+            } else {
+                reject(res)
+            }
         }).catch(err => {
             reject(err)
         })
     })
 }
+
+const get = (url, params = {}, headers = {}, config = {}) => {
+    return request({
+        url,
+        method: 'get',
+        params,
+        headers,
+        ...config,
+    })
+}
+
+const del = (url, params = {}, headers = {}, config = {}) => {
+    return request({
+        url,
+        method: 'delete',
+        params,
+        headers,
+        ...config,
+        paramsSerializer: params => {
+            return qs.stringify(params, {indices: false})
+        },
+    })
+}
+
+const put = (url, data = {}, headers = {}, config = {}) => {
+    return request({
+        url,
+        method: 'put',
+        data,
+        headers,
+        ...config,
+    })
+}
+
+
+const post = (url, data = {}, headers = {}, config = {}) => {
+    return request({
+        url,
+        method: 'post',
+        data,
+        headers,
+        ...config,
+    })
+}
+
+
+const form = (url, data = {}, headers = {}, config = {}) => {
+    return request({
+        url,
+        method: 'post',
+        data: qs.stringify(data),
+        headers,
+        ...config,
+    })
+}
+
+[instance, request, get, del, put, post, form].forEach(x => {
+    x.getCancelToken = () => {
+        return axios.CancelToken
+    }
+})
+
+export {instance as axios, request, get, del, put, post, form}
 
 export default instance

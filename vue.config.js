@@ -1,4 +1,9 @@
+'use strict'
 const path = require('path')
+const port = process.env.port || process.env.npm_config_port || 8080
+const resolve = dir => {
+    return path.join(__dirname, dir)
+}
 
 module.exports = {
     publicPath: '/',
@@ -14,17 +19,17 @@ module.exports = {
     configureWebpack: {},
     chainWebpack: config => {
         config.resolve.alias
-            .set('@', path.join(__dirname, 'src'))
-            .set('style', path.join(__dirname, 'src/style'))
-            .set('assets', path.join(__dirname, 'src/assets'))
-            .set('components', path.join(__dirname, 'src/components'))
+            .set('@', resolve('src'))
+            .set('style', resolve('src/style'))
+            .set('assets', resolve('src/assets'))
+            .set('components', resolve('src/components'))
     },
     devServer: {
+        port: port,
         open: false,
-        port: 8080,
         proxy: {
             '/api': {
-                target: 'http://localhost:8081',
+                target: 'http://localhost:9090',
                 secure: false,
                 changeOrigin: true,
                 pathRewrite: {
