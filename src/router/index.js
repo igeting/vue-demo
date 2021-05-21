@@ -63,8 +63,8 @@ router.beforeEach((to, from, next) => {
             title(to)
             next()
         } else {
-            next({path: '/login'})
-            // next()
+            // next({path: '/login'})
+            next()
         }
     }
 })
