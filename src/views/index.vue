@@ -2,14 +2,14 @@
     <el-container>
         <el-header>
             <el-avatar class="logo" :size="'small'" :src="require('@/assets/logo.jpg')"></el-avatar>
-            <el-span @click="$router.push('/')" class="title">{{title}}</el-span>
+            <span @click="$router.push('/')" class="title">{{title}}</span>
         </el-header>
         <el-container>
             <el-aside :class="{'el-aside-fix':collapse}" width="200px">
                 <menus :collapse="collapse" @collapsed="menuCollapse"></menus>
             </el-aside>
             <el-main>
-                <router-view/>
+                <router-view></router-view>
             </el-main>
         </el-container>
         <el-footer>
@@ -42,7 +42,7 @@
                 }
 
             },
-        }
+        },
     }
 </script>
 

@@ -4,7 +4,7 @@
             <i class="el-icon-s-fold" v-if="!collapse"></i>
             <i class="el-icon-s-unfold" v-if="collapse"></i>
         </div>
-        <el-menu :default-active="activeIndex" :collapse="collapse" @select="menuSelect">
+        <el-menu :default-active="this.$route.path" :collapse="collapse" @select="menuSelect">
             <side-bar :list="menuList"></side-bar>
         </el-menu>
     </div>
@@ -21,7 +21,6 @@
         },
         data() {
             return {
-                activeIndex: '1',
                 menuList: [
                     {
                         name: "首页",

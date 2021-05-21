@@ -13,7 +13,7 @@
         name: 'about',
         components: {
             UserInfo,
-        }
+        },
     }
 </script>
 
