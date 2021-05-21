@@ -94,13 +94,15 @@
     }
 
     .logo {
+        cursor: pointer;
         margin-right: 10px !important;
         width: 26px;
         height: 26px;
     }
 
     .title {
-        font-size: 26px;
+        cursor: pointer;
         font-weight: bolder;
+        font-size: 26px;
     }
 </style>

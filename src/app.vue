@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <router-view v-if="$route.path=='/login'"/>
-        <index v-else/>
+        <router-view v-if="$route.path=='/login'"></router-view>
+        <index v-else></index>
     </div>
 </template>
 <script>
