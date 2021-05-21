@@ -18,7 +18,7 @@ const routes = [
 ]
 
 const router = new Router({
-    mode: 'history', //hash, history
+    mode: 'hash', //hash, history
     base: process.env.BASE_URL,
     routes
 })
