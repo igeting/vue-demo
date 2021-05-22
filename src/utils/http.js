@@ -14,7 +14,7 @@ const Axios = () => {
     let baseURL = process.env.base_url || '/api'
     let token = sessionStorage.getItem("token")
     instance = axios.create({
-        baseURL,
+        baseURL: baseURL,
         timeout: 10 * 1000,
         headers: {
             'Content-Type': contentTypes.json,

@@ -40,27 +40,21 @@ const router = new Router({
     routes: routes,
 })
 
-const title = to => {
+router.beforeEach((to, from, next) => {
     if (to.meta.title) {
         document.title = to.meta.title
-    } else {
-        document.title = 'vue'
     }
-}
 
-router.beforeEach((to, from, next) => {
     let token = sessionStorage.getItem('token')
+
     if (to.path == '/login') {
         if (token) {
-            title(to)
             next({path: '/'})
         } else {
-            title(to)
             next()
         }
     } else {
         if (token) {
-            title(to)
             next()
         } else {
             // next({path: '/login'})
