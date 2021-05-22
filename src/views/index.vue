@@ -13,6 +13,7 @@
             </el-main>
         </el-container>
         <el-footer>
+            <svg-icon icon-class="info"/>
             <el-link>about</el-link>
         </el-footer>
     </el-container>

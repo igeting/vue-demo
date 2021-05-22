@@ -23,6 +23,12 @@ module.exports = {
             .set('style', resolve('src/style'))
             .set('assets', resolve('src/assets'))
             .set('components', resolve('src/components'))
+
+        let svgRule = config.module.rule('svg')
+        svgRule.uses.clear()
+        svgRule.use('svg-sprite-loader').loader('svg-sprite-loader').options({
+            symbolId: 'icon-[name]'
+        })
     },
     devServer: {
         port: port,
