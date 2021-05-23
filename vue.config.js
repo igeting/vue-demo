@@ -24,11 +24,20 @@ module.exports = {
             .set('assets', resolve('src/assets'))
             .set('components', resolve('src/components'))
 
-        let svgRule = config.module.rule('svg')
-        svgRule.uses.clear()
-        svgRule.use('svg-sprite-loader').loader('svg-sprite-loader').options({
-            symbolId: 'icon-[name]'
-        })
+        config.module
+            .rule('svg')
+            .exclude.add(resolve('src/static/icons/svg'))
+            .end()
+
+        config.module
+            .rule('icons')
+            .test(/\.svg$/)
+            .include.add(resolve('src/static/icons/svg'))
+            .end()
+            .use('svg-sprite-loader')
+            .loader('svg-sprite-loader')
+            .options({symbolId: 'icon-[name]'})
+            .end()
     },
     devServer: {
         port: port,
