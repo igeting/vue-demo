@@ -47,14 +47,14 @@ router.beforeEach((to, from, next) => {
 
     let token = sessionStorage.getItem('token')
 
-    if (to.path == '/login') {
-        if (token) {
+    if (token) {
+        if (to.path == '/login') {
             next({path: '/'})
         } else {
             next()
         }
     } else {
-        if (token) {
+        if (to.path == '/login') {
             next()
         } else {
             // next({path: '/login'})
