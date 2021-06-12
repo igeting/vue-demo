@@ -11,6 +11,12 @@
         name: 'app',
         components: {
             index,
+        },
+        data() {
+            return {}
+        },
+        mounted() {
+            console.log(process.env.VUE_APP_BASE_URL)
         }
     }
 </script>
